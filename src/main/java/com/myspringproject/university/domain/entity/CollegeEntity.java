@@ -1,5 +1,6 @@
 package com.myspringproject.university.domain.entity;
 
+import com.myspringproject.university.domain.model.DeanDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +24,9 @@ public class CollegeEntity {
 
     private String name;
 
-    @Column(name="dean")
-    private BigInteger deanCnp;
+    private String city;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "dean_id", referencedColumnName = "id")
+    private DeanEntity dean;
 }

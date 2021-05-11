@@ -13,6 +13,7 @@ public class CollegeDto {
 
     private Integer collegeId;
     private String name;
+    private String city;
     private DeanDto dean;
 
 }

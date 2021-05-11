@@ -1,0 +1,16 @@
+{
+  "id": 15,
+  "cnp": 2800110000000,
+  "firstName": "ABC",
+  "lastName": "XYZ",
+  "college": {
+    "collegeId": 2,
+    "name": "Facultatea de Matematica si Informatica",
+    "dean": {
+      "cnp": 1690230229060,
+      "firstName": "Stefan",
+      "lastName": "Dumitrache",
+      "dateOfInstalment": "2019-04-06"
+    }
+  }
+}

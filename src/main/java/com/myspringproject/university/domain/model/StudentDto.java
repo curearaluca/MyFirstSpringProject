@@ -1,12 +1,11 @@
 package com.myspringproject.university.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
-import java.math.BigInteger;
+import javax.validation.constraints.NotBlank;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,9 +13,12 @@ import java.math.BigInteger;
 public class StudentDto {
 
     private Integer id;
-    private BigInteger cnp;
+
+    @ToString.Exclude
+    @NotBlank(message = "CNP must not be null")
+    private Long cnp;
     private String firstName;
     private String lastName;
-    private CollegeDto collegeDto;
+    private CollegeDto college;
 
 }

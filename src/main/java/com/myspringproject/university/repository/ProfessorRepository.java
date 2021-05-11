@@ -4,7 +4,6 @@ import com.myspringproject.university.domain.entity.ProfessorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Repository
@@ -14,7 +13,7 @@ public interface ProfessorRepository extends JpaRepository<ProfessorEntity, Inte
 
     ProfessorEntity findStudentById(Integer id);
 
-    ProfessorEntity findByCnp(BigInteger cnp);
+    ProfessorEntity findByCnp(Long cnp);
 
 
 }

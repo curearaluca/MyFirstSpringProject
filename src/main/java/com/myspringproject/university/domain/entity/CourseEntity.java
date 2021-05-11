@@ -25,6 +25,8 @@ public class CourseEntity {
     @Column(name="course_name")
     private String name;
 
+    private Integer credits;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "professor_id", referencedColumnName = "professor_id")
     private ProfessorEntity professor;

@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 @Data
 @Builder
@@ -22,7 +21,7 @@ public class StudentEntity {
     private Integer id;
 
     @Column(name="student_cnp")
-    private BigInteger cnp;
+    private Long cnp;
 
     @Column(name="first_name")
     private String firstName;
@@ -33,4 +32,8 @@ public class StudentEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "univ_id", referencedColumnName = "college_id")
     private CollegeEntity college;
+
+    //work in progress..
+//    @ManyToMany
+//    private Set<CourseEntity> course;
 }

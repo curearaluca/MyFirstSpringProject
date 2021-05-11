@@ -19,8 +19,7 @@ import java.time.LocalDate;
 public class DeanEntity {
 
     @Id
-    @Column(name= "dean_cnp")
-    private BigInteger cnp;
+    private Integer id;
 
     @Column(name= "first_name")
     private String firstName;
@@ -28,10 +27,12 @@ public class DeanEntity {
     @Column(name= "last_name")
     private String lastName;
 
+    @Column(name= "dean_cnp")
+    private Long cnp;
+
     @Column(name = "date_of_instalment")
     private LocalDate dateOfInstalment;
 
-    @Column(name= "college_id")
-    private Integer collegeId;
+    private String title;
 
 }
