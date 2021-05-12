@@ -2,10 +2,7 @@ package com.myspringproject.university.domain.model;
 
 import lombok.*;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Data
 @Builder
@@ -13,22 +10,27 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class StudentDtoUpdateRequest {
 
-    @NotNull
     private Integer id;
 
     private Long cnp;
 
     @NotNull(message = "First name must not be null")
-    @NotBlank
+    @NotBlank(message = "First name must not be blank")
     private String firstName;
 
     @NotNull(message = "Last name must not be null")
-    @NotBlank
+    @NotBlank(message = "Last name must not be blank")
     private String lastName;
 
-    @ToString.Exclude
-    @Min(1)
-    @Max(4)
+    @Email
+    private String mail;
+
+    @Min(value=0, message = "Grade must not be less than 0")
+    @Max(value = 10, message = "Grade must not be greater than 10")
+    private Double finalGrade;
+
+    @Min(value = 1, message = "College must not be less than 1")
+    @Max(value = 4, message = "College must not be greater than 4")
     private Integer collegeId;
 
 }

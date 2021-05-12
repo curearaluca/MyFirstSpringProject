@@ -1,11 +1,13 @@
 package com.myspringproject.university.controller;
 
 import com.myspringproject.university.domain.model.DeanDto;
+import com.myspringproject.university.domain.model.DeanDtoUpdateRequest;
 import com.myspringproject.university.service.DeanService;
 import lombok.Data;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @Data
@@ -14,10 +16,12 @@ public class DeanController {
 
     private final DeanService deanService;
 
-    //update dean (delete la fostul dean + create new dean, din aceeasi metoda)
-    @PutMapping("/update")
-    public DeanDto updateDean(){
-        //work in progress
-        return null;
+    //see if this updates the deanDto in the college with the corresponding id as well
+
+    @PutMapping(value = "/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public DeanDto updateDean(@PathVariable(name="id") Integer id, @RequestBody @Valid DeanDtoUpdateRequest deanDto){
+        deanDto.setId(id);
+        return deanService.updateDean(deanDto);
     }
+
 }

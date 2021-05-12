@@ -7,7 +7,6 @@ import com.myspringproject.university.domain.model.ProfessorDtoUpdateRequest;
 import com.myspringproject.university.exception.FileNotFoundException;
 import com.myspringproject.university.exception.ProfessorNotFoundException;
 import com.myspringproject.university.mapper.ProfessorDtoCreateRequestToProfessorEntityMapper;
-import com.myspringproject.university.mapper.ProfessorDtoToProfessorEntityMapper;
 import com.myspringproject.university.mapper.ProfessorEntityToProfessorDtoMapper;
 import com.myspringproject.university.repository.ProfessorRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +25,6 @@ public class ProfessorService {
 
     private final ProfessorRepository professorRepository;
     private final ProfessorEntityToProfessorDtoMapper professorEntityToProfessorDtoMapper;
-    private final ProfessorDtoToProfessorEntityMapper professorDtoToProfessorEntityMapper;
     private final ProfessorDtoCreateRequestToProfessorEntityMapper professorDtoCreateRequestToProfessorEntityMapper;
 
     @Transactional(readOnly = true)
@@ -60,6 +58,12 @@ public class ProfessorService {
                 .orElseThrow(()-> new ProfessorNotFoundException("No professor found for id "+ professorDto.getId()));
         professorEntity.setLastName(professorDto.getLastName());
         professorEntity.setFirstName(professorDto.getFirstName());
+        if(professorDto.getSalary() != null){
+            professorEntity.setSalary(professorDto.getSalary());
+        }
+        if(professorDto.getMail() != null){
+            professorEntity.setMail(professorDto.getMail());
+        }
         ProfessorEntity updatedProfessor = professorRepository.save(professorEntity);
         return professorEntityToProfessorDtoMapper.mapProfessorEntityToDto(updatedProfessor);
     }

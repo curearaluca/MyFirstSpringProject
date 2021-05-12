@@ -1,6 +1,7 @@
 package com.myspringproject.university.domain.model;
 
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.validation.constraints.*;
 
@@ -12,7 +13,6 @@ public class StudentDtoCreateRequest {
 
     private Integer id;
 
-    @ToString.Exclude
     @NotBlank(message = "CNP must not be null")
     @DecimalMin("1000000000000")
     @DecimalMax("2999999999999")
@@ -26,7 +26,12 @@ public class StudentDtoCreateRequest {
     @NotBlank
     private String lastName;
 
-    @ToString.Exclude
+    @Email
+    private String mail;
+
+    @Builder.Default
+    private Double finalGrade= Double.valueOf(0);
+
     @Min(1)
     @Max(4)
     private Integer collegeId;

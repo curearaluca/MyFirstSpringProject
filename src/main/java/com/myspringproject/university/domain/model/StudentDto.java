@@ -14,11 +14,12 @@ public class StudentDto {
 
     private Integer id;
 
-    @ToString.Exclude
     @NotBlank(message = "CNP must not be null")
     private Long cnp;
     private String firstName;
     private String lastName;
+    private String mail;
+    private Double finalGrade;
     private CollegeDto college;
 
 }

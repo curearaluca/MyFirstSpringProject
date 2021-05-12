@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Data
 @Builder
@@ -28,6 +29,11 @@ public class ProfessorEntity {
 
     @Column(name="last_name")
     private String lastName;
+
+    private Integer salary;
+
+    @Column(name="professor_mail")
+    private String mail;
 
     @ManyToOne
     @JoinColumn(name= "college_id", referencedColumnName = "college_id")

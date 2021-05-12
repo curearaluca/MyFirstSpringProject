@@ -18,6 +18,8 @@ public class ProfessorDtoCreateRequestToProfessorEntityMapper {
                 .cnp(professorDto.getCnp())
                 .firstName(professorDto.getFirstName())
                 .lastName(professorDto.getLastName())
+                .salary(professorDto.getSalary())
+                .mail(professorDto.getMail())
                 .college(collegeRepository.findById(professorDto.getCollegeId())
                         .orElseThrow(()->new CollegeNotFoundException("College id provided does not exist")))
                 .build();

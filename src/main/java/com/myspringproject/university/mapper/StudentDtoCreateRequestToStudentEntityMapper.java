@@ -21,6 +21,8 @@ public class StudentDtoCreateRequestToStudentEntityMapper {
                 .cnp(studentDto.getCnp())
                 .firstName(studentDto.getFirstName())
                 .lastName(studentDto.getLastName())
+                .mail(studentDto.getMail())
+                .finalGrade(studentDto.getFinalGrade())
                 .college(collegeRepository.findById(studentDto.getCollegeId())
                         .orElseThrow(()-> new CollegeNotFoundException("College id provided does not exist")))
                 .build();

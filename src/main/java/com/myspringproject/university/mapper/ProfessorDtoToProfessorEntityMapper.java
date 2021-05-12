@@ -12,6 +12,8 @@ public class ProfessorDtoToProfessorEntityMapper {
                 .cnp(professorDto.getCnp())
                 .firstName(professorDto.getFirstName())
                 .lastName(professorDto.getLastName())
+                .salary(professorDto.getSalary())
+                .mail(professorDto.getMail())
                 .build();
     }
 }

@@ -17,6 +17,8 @@ public class StudentEntityToStudentDtoMapper {
                 .cnp(studentEntity.getCnp())
                 .firstName(studentEntity.getFirstName())
                 .lastName(studentEntity.getLastName())
+                .mail(studentEntity.getMail())
+                .finalGrade(studentEntity.getFinalGrade())
                 .college(collegeEntityToCollegeDtoMapper.mapCollegeEntityToDto(studentEntity.getCollege()))
                 .build();
     }

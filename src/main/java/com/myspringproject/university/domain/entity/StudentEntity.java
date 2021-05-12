@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Data
 @Builder
@@ -28,6 +29,12 @@ public class StudentEntity {
 
     @Column(name="last_name")
     private String lastName;
+
+    @Column(name="student_mail")
+    private String mail;
+
+    @Column(name="final_grade")
+    private Double finalGrade;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "univ_id", referencedColumnName = "college_id")

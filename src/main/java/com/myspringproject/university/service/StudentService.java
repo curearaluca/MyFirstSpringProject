@@ -5,7 +5,6 @@ import com.myspringproject.university.domain.model.*;
 import com.myspringproject.university.exception.FileNotFoundException;
 import com.myspringproject.university.exception.StudentNotFoundException;
 import com.myspringproject.university.mapper.StudentDtoCreateRequestToStudentEntityMapper;
-import com.myspringproject.university.mapper.StudentDtoToStudentEntityMapper;
 import com.myspringproject.university.mapper.StudentEntityToStudentDtoMapper;
 import com.myspringproject.university.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,6 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final StudentEntityToStudentDtoMapper studentEntityToStudentDtoMapper;
-    private final StudentDtoToStudentEntityMapper studentDtoToStudentEntityMapper;
     private final StudentDtoCreateRequestToStudentEntityMapper studentDtoCreateRequestToStudentEntityMapper;
 
     @Transactional(readOnly = true)
@@ -58,6 +56,12 @@ public class StudentService {
                 .orElseThrow(()-> new StudentNotFoundException("Student not found for id "+ studentDto.getId()));
         studentEntity.setLastName(studentDto.getLastName());
         studentEntity.setFirstName(studentDto.getFirstName());
+        if(studentDto.getMail() != null){
+            studentEntity.setMail(studentDto.getMail());
+        }
+        if(studentDto.getFinalGrade() != null){
+            studentEntity.setFinalGrade(studentDto.getFinalGrade());
+        }
         StudentEntity updatedStudent = studentRepository.save(studentEntity);
         return studentEntityToStudentDtoMapper.mapStudentEntityToDto(updatedStudent);
     }
@@ -100,4 +104,6 @@ public class StudentService {
     public void deleteStudentById(Integer studentId) {
         studentRepository.deleteById(studentId);
     }
+
+
 }
