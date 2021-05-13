@@ -1,15 +1,18 @@
 package com.myspringproject.university.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfessorDtoCreateRequest {
+public class DeanDtoCreateRequest {
 
     private Integer id;
 
@@ -27,17 +30,9 @@ public class ProfessorDtoCreateRequest {
     @NotBlank(message = "Last name must not be blank")
     private String lastName;
 
-    @NotNull(message = "Salary must not be null")
-    @NotBlank(message = "Salary must not be blank")
-    @Min(value = 1400, message = "Salary must not be less than the minimum average salary")
-    private Integer salary;
+    @Builder.Default
+    private LocalDate dateOfInstalment=LocalDate.now();
 
-    @Email
-    private String mail;
-
-    @NotNull(message = "College id must not be null")
-    @Min(1)
-    @Max(6)
-    private Integer collegeId;
+    private String title;
 
 }

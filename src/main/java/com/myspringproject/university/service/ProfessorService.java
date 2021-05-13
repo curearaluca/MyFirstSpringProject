@@ -29,7 +29,6 @@ public class ProfessorService {
 
     @Transactional(readOnly = true)
     public List<ProfessorDto> getAllProfessors(){
-
         return professorRepository.findAll().stream()
                 .map(professorEntity-> professorEntityToProfessorDtoMapper.mapProfessorEntityToDto(professorEntity))
                 .collect(Collectors.toList());

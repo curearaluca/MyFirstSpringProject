@@ -2,10 +2,7 @@ package com.myspringproject.university.domain.model;
 
 import lombok.*;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.math.BigInteger;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
@@ -17,8 +14,9 @@ public class DeanDtoUpdateRequest {
     private Integer id;
 
     @NotNull(message = "Cnp must not be null")
-    @NotBlank
     @Digits(integer = 13, fraction = 0)
+    @DecimalMin("1000000000000")
+    @DecimalMax("2999999999999")
     private Long cnp;
 
     @NotNull(message = "First name must not be null")
@@ -29,11 +27,8 @@ public class DeanDtoUpdateRequest {
     @NotBlank(message = "Last name must not be blank")
     private String lastName;
 
-    private LocalDate dateOfInstalment;
+    @Builder.Default
+    private LocalDate dateOfInstalment=LocalDate.now();
 
     private String title;
-
-    public BigInteger getId(){
-        return BigInteger.valueOf(this.id);
-    }
 }

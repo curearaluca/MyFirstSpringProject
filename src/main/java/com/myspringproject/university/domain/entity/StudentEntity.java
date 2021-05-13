@@ -1,12 +1,14 @@
 package com.myspringproject.university.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -40,7 +42,7 @@ public class StudentEntity {
     @JoinColumn(name= "univ_id", referencedColumnName = "college_id")
     private CollegeEntity college;
 
-    //work in progress..
-//    @ManyToMany
-//    private Set<CourseEntity> course;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enrolledStudents")
+    private List<CourseEntity> courses = new ArrayList<>();
 }

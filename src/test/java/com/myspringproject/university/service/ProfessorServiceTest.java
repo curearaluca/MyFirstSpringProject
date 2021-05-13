@@ -3,6 +3,7 @@ package com.myspringproject.university.service;
 import com.myspringproject.university.domain.entity.ProfessorEntity;
 import com.myspringproject.university.domain.model.ProfessorDto;
 import com.myspringproject.university.domain.model.ProfessorDtoUpdateRequest;
+import com.myspringproject.university.exception.ProfessorNotFoundException;
 import com.myspringproject.university.mapper.ProfessorDtoCreateRequestToProfessorEntityMapper;
 import com.myspringproject.university.mapper.ProfessorEntityToProfessorDtoMapper;
 import com.myspringproject.university.repository.ProfessorRepository;
@@ -18,6 +19,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProfessorServiceTest {
@@ -90,4 +95,25 @@ public class ProfessorServiceTest {
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result).isSameAs(professorDto);
     }
+
+    @Test
+    public void given_non_existing_professor_when_updating_then_professor_not_found_exception_is_thrown(){
+        //Given
+        int id = 111;
+        String lastName = "last name";
+        var input = ProfessorDtoUpdateRequest.builder()
+                .id(id)
+                .lastName(lastName)
+                .firstName("first name")
+                .salary(8000)
+                .build();
+        when(professorRepository.findById(id)).thenReturn(Optional.empty());
+        // When
+        var throwable = catchThrowable(() -> professorService.updateProfessor(input));
+        //Then
+        assertThat(throwable).isNotNull();
+        assertThat(throwable).isInstanceOf(ProfessorNotFoundException.class);
+        assertThat(throwable.getMessage()).isEqualTo("No professor found for id "+id);
+    }
+
 }

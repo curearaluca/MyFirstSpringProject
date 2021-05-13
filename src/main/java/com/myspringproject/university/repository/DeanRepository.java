@@ -8,6 +8,7 @@ import java.math.BigInteger;
 import java.util.Optional;
 
 @Repository
-public interface DeanRepository extends JpaRepository<DeanEntity, BigInteger> {
+public interface DeanRepository extends JpaRepository<DeanEntity, Integer> {
 
+    DeanEntity findByCnp(Long cnp);
 }

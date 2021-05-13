@@ -1,12 +1,14 @@
 package com.myspringproject.university.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -38,5 +40,9 @@ public class ProfessorEntity {
     @ManyToOne
     @JoinColumn(name= "college_id", referencedColumnName = "college_id")
     private CollegeEntity college;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "professor")
+    private List<CourseEntity> courses= new ArrayList<>();
 
 }

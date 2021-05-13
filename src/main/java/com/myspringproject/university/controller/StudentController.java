@@ -1,5 +1,6 @@
 package com.myspringproject.university.controller;
 
+import com.myspringproject.university.domain.entity.CourseEntity;
 import com.myspringproject.university.domain.model.StudentDto;
 import com.myspringproject.university.domain.model.StudentDtoCreateRequest;
 import com.myspringproject.university.domain.model.StudentDtoUpdateRequest;
@@ -60,6 +61,11 @@ public class StudentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStudentById(@PathVariable(name="studentId") Integer studentId){
         studentService.deleteStudentById(studentId);
+    }
+
+    @GetMapping(value = "/{studentId}/courses", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CourseEntity> getAllCoursesOfAStudent(@PathVariable(name = "studentId") Integer studentId){
+        return studentService.getAllCoursesOfAStudent(studentId);
     }
 
 }

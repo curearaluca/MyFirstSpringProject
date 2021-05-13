@@ -13,6 +13,7 @@ public class CourseDto {
 
     private Integer id;
     private String name;
+    private Integer credits;
     private ProfessorDto professorDto;
     private CollegeDto collegeDto;
 

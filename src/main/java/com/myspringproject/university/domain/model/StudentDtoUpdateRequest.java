@@ -30,7 +30,7 @@ public class StudentDtoUpdateRequest {
     private Double finalGrade;
 
     @Min(value = 1, message = "College must not be less than 1")
-    @Max(value = 4, message = "College must not be greater than 4")
+    @Max(value = 6, message = "College must not be greater than 6")
     private Integer collegeId;
 
 }

@@ -2,8 +2,11 @@ package com.myspringproject.university.service;
 
 import com.myspringproject.university.domain.entity.StudentEntity;
 import com.myspringproject.university.domain.model.ProfessorDto;
+import com.myspringproject.university.domain.model.ProfessorDtoUpdateRequest;
 import com.myspringproject.university.domain.model.StudentDto;
 import com.myspringproject.university.domain.model.StudentDtoUpdateRequest;
+import com.myspringproject.university.exception.ProfessorNotFoundException;
+import com.myspringproject.university.exception.StudentNotFoundException;
 import com.myspringproject.university.mapper.StudentDtoCreateRequestToStudentEntityMapper;
 import com.myspringproject.university.mapper.StudentEntityToStudentDtoMapper;
 import com.myspringproject.university.repository.StudentRepository;
@@ -19,6 +22,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StudentServiceTest {
@@ -87,5 +94,24 @@ public class StudentServiceTest {
         Mockito.verify(studentEntityMock).setMail(student.getMail());
         Assertions.assertThat(result).isNotNull();
         Assertions.assertThat(result).isSameAs(studentDto);
+    }
+
+    @Test
+    public void given_non_existing_student_when_updating_then_student_not_found_exception_is_thrown(){
+        //Given
+        int id = 222;
+        String lastName = "last name";
+        var input = StudentDtoUpdateRequest.builder()
+                .id(id)
+                .lastName(lastName)
+                .firstName("first name")
+                .build();
+        when(studentRepository.findById(id)).thenReturn(Optional.empty());
+        // When
+        var throwable = catchThrowable(() -> studentService.updateStudent(input));
+        //Then
+        assertThat(throwable).isNotNull();
+        assertThat(throwable).isInstanceOf(StudentNotFoundException.class);
+        assertThat(throwable.getMessage()).isEqualTo("Student not found for id "+id);
     }
 }

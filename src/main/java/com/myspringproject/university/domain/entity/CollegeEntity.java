@@ -1,13 +1,11 @@
 package com.myspringproject.university.domain.entity;
 
-import com.myspringproject.university.domain.model.DeanDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 @Data
 @Builder
@@ -26,7 +24,8 @@ public class CollegeEntity {
 
     private String city;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "dean_id", referencedColumnName = "id")
     private DeanEntity dean;
+
 }

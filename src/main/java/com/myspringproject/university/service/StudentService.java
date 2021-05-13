@@ -1,5 +1,6 @@
 package com.myspringproject.university.service;
 
+import com.myspringproject.university.domain.entity.CourseEntity;
 import com.myspringproject.university.domain.entity.StudentEntity;
 import com.myspringproject.university.domain.model.*;
 import com.myspringproject.university.exception.FileNotFoundException;
@@ -105,5 +106,7 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 
-
+    public List<CourseEntity> getAllCoursesOfAStudent(Integer studentId) {
+        return studentRepository.findById(studentId).orElseThrow(()->new StudentNotFoundException("No student for given id")).getCourses();
+    }
 }

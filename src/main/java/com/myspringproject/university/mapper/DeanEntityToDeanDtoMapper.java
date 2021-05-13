@@ -1,9 +1,7 @@
 package com.myspringproject.university.mapper;
 
 import com.myspringproject.university.domain.entity.DeanEntity;
-import com.myspringproject.university.domain.entity.StudentEntity;
 import com.myspringproject.university.domain.model.DeanDto;
-import com.myspringproject.university.domain.model.StudentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

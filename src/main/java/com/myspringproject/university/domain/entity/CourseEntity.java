@@ -1,13 +1,13 @@
 package com.myspringproject.university.domain.entity;
 
-import com.myspringproject.university.domain.model.ProfessorDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -35,4 +35,19 @@ public class CourseEntity {
     @JoinColumn(name= "college_id", referencedColumnName = "college_id")
     private CollegeEntity college;
 
+    @ManyToMany
+    @JoinTable(
+            name="student_enrolled",
+            joinColumns = @JoinColumn(name="course_id"),
+            inverseJoinColumns = @JoinColumn(name="student_id")
+    )
+    private List<StudentEntity> enrolledStudents = new ArrayList<>();
+
+    public void registerStudent(StudentEntity studentEntity) {
+        enrolledStudents.add(studentEntity);
+    }
+
+    public void assignProfessor(ProfessorEntity professorEntity) {
+        professor=professorEntity;
+    }
 }
